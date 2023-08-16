@@ -1,4 +1,8 @@
-function SpeakersToolbar() {
+import { useState } from "react";
+
+function SpeakersToolbar({ theme, setTheme }) {
+  const [showSessions, setShowSessions] = useState(true);
+
   return (
     <section className="toolbar dark-theme-header">
       <div className="container">
@@ -7,7 +11,13 @@ function SpeakersToolbar() {
             <li className="d-flex flex-column flex-md-row">
               <b>Show Sessions&nbsp;&nbsp;</b>
               <label className="fav">
-                <input type="checkbox" checked={true} />
+                <input
+                  type="checkbox"
+                  checked={showSessions}
+                  onChange={(event) => {
+                    setShowSessions(event.target.checked);
+                  }}
+                />
                 <span className="switch"></span>
               </label>
             </li>
@@ -15,10 +25,13 @@ function SpeakersToolbar() {
               <strong>Theme</strong>
               <label className="dropdown">
                 <select
-                  value="light"
+                  value={theme}
                   name=""
                   id=""
                   className="form-control theme"
+                  onChange={(event) => {
+                    setTheme(event.target.value);
+                  }}
                 >
                   <option value="light">Light</option>
                   <option value="dark">Dark</option>
